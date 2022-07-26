@@ -1,0 +1,13 @@
+# IDE Specific
+*.vcxproj.user
+*.vcxproj.filters
+.vs
+.idea
+.vscode
+*.pro.user
+*.aps
+
+# Builds
+x64
+
+
