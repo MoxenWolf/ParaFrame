@@ -9,7 +9,7 @@ ParaBrowser::ParaBrowser(QWidget *parent)
 
     uiCreate();
 
-    this->adjustSize();
+    //this->adjustSize();
 }
 
 ParaBrowser::~ParaBrowser()
@@ -22,10 +22,9 @@ void ParaBrowser::uiCreate()
     this->setCentralWidget(frameCentral);
     this->centralWidget()->setLayout(layoutCentral);
 
-    /*QLabel* x = new QLabel("testing");
-    layoutCentral->addWidget(x);*/
-
-    frameTopInfo = new QFrame(this);
+    /* Top Frame */
+    QFrame* frameTopInfo = new QFrame();
+    frameTopInfo->setSizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Fixed);
     frameTopInfo->setFrameStyle(topPanelStyle);
     layoutCentral->addWidget(frameTopInfo);
     QHBoxLayout* layoutTopInfo = new QHBoxLayout();
@@ -34,6 +33,44 @@ void ParaBrowser::uiCreate()
     lblInterfaceVersionOutput->setFont(fontInfo);
     lblInterfaceVersionOutput->setText("Supporting ParaFrame Interfacing Versions: <b>[" + PARA_COMMON->INTERFACE_VERSION_SUPPORT.join("] [") + QString("]</b>"));
     layoutTopInfo->addWidget(lblInterfaceVersionOutput);
+    
+
+    /* Middle Frame Wrap */
+    QFrame* frameMiddleContentWrap = new QFrame();
+    layoutCentral->addWidget(frameMiddleContentWrap);
+    QHBoxLayout* layoutMiddleContentWrap = new QHBoxLayout();
+    layoutMiddleContentWrap->setContentsMargins(0, 0, 0, 0);
+    frameMiddleContentWrap->setLayout(layoutMiddleContentWrap);
+    frameMiddleContentWrap->setMinimumHeight(100);
+    
+
+    /* Middle Left */
+    QFrame* frameMiddleLeft = new QFrame();
+    layoutMiddleContentWrap->addWidget(frameMiddleLeft);
+    frameMiddleLeft->setFrameStyle(topPanelStyle);
+    frameMiddleLeft->setFixedWidth(50);
+
+    /* Middle Center */
+    QFrame* frameMiddleCenter = new QFrame();
+    layoutMiddleContentWrap->addWidget(frameMiddleCenter);
+    frameMiddleCenter->setFrameStyle(topPanelStyle);
+    frameMiddleCenter->setMinimumWidth(200);
+
+    /* Middle Right */
+    QFrame* frameMiddleRight = new QFrame();
+    layoutMiddleContentWrap->addWidget(frameMiddleRight);
+    frameMiddleRight->setFrameStyle(topPanelStyle);
+    frameMiddleRight->setFixedWidth(50);
+
+    /* Bottom Frame */
+    QFrame* frameBottom = new QFrame();
+    layoutCentral->addWidget(frameBottom);
+    frameBottom->setFrameStyle(topPanelStyle);
+    frameBottom->setFixedHeight(50);
+
+    
+
+
 }
 
 void ParaBrowser::conSS()
