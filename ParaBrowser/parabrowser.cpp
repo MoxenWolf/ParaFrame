@@ -49,7 +49,7 @@ void ParaBrowser::uiCreate()
 
     QLabel* lblInterfaceVersionOutput = new QLabel();
     lblInterfaceVersionOutput->setFont(fontInfo);
-    lblInterfaceVersionOutput->setText("Supporting ParaFrame Interfacing Versions: <b>[" + PARA_COMMON->INTERFACE_VERSION_SUPPORT.join("] [") + QString("]</b>"));
+    lblInterfaceVersionOutput->setText("Supporting ParaFrame Interfacing Versions: <b>[" + ParaLib::PARA_COMMON->INTERFACE_VERSION_SUPPORT.join("] [") + QString("]</b>"));
     layoutTopInfo->addWidget(lblInterfaceVersionOutput);
     
 
@@ -105,20 +105,18 @@ void ParaBrowser::uiCreate()
 }
 
 void ParaBrowser::conSS()
-{
-
-}
+{}
 
 /* Slots */
 void ParaBrowser::slot_connect(bool checked)
 {
     QPalette palette = QGuiApplication::palette();
     // palette.setColor(QPalette::Active, QPalette::ColorRole::Window, QColor(QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255)));
-    palette.setColor(QPalette::Active, QPalette::ColorRole::Window, PARA_COMMON->getRandColor());
+    palette.setColor(QPalette::Active, QPalette::ColorRole::Window, ParaLib::PARA_COMMON->getRandColor());
     this->setPalette(palette);
 
-    ParaLib x;
-    int y = x.returnInt();
+    ParaLib::ParaCommon x;
+    lblStatusReturn->setText("Return is: " + QString::number(x.returnInt()));
 
-    lblStatusReturn->setText("Return is: " + QString::number(y));
+    PF_DEBUG("testing debug output")
 }

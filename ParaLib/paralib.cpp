@@ -1,10 +1,15 @@
 #include "paralib.h"
 
-ParaLib::ParaLib()
+namespace ParaLib
 {
+	ParaCommon::ParaCommon(QWidget* parent) : QObject(parent)
+	{
+	}
+
+	int ParaCommon::returnInt()
+	{
+		return 42;
+	}
 }
 
-int ParaLib::returnInt()
-{
-	return 42;
-}
+
