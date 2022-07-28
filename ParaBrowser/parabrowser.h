@@ -38,6 +38,7 @@ private:
     QFrame* frameTopInfo;
 
     QFont fontInfo{ "consolas", 8};
+    int topPanelStyle{ QFrame::Panel | QFrame::Sunken };
 };
 
 /* Todo: move into common header once shared lib is built */

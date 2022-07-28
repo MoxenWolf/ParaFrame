@@ -26,7 +26,7 @@ void ParaBrowser::uiCreate()
     layoutCentral->addWidget(x);*/
 
     frameTopInfo = new QFrame(this);
-    frameTopInfo->setFrameStyle(QFrame::Panel);
+    frameTopInfo->setFrameStyle(topPanelStyle);
     layoutCentral->addWidget(frameTopInfo);
     QHBoxLayout* layoutTopInfo = new QHBoxLayout();
     frameTopInfo->setLayout(layoutTopInfo);
