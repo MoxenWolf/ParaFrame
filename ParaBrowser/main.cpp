@@ -31,20 +31,26 @@ int main(int argc, char *argv[])
     QCommandLineOption devAccess(QStringList() << "d" << "developer" << "Activate Developer Access Mode");
     parser.addOption(devAccess);
 
+    QCommandLineOption resetSettings(QStringList() << "r" << "reset" << "Reset Settings");
+    parser.addOption(resetSettings);
+
     parser.process(app);
 
     //Restore User Settings
     ParaBrowserSettings settings;
 
     QSettings appUserSettings(QSettings::Scope::UserScope, "ParanoidFramework", "ParaBrowser", &app);
-    appUserSettings.beginGroup("General");
-    appUserSettings.beginGroup("LastKnownDimensions");
+    if (!parser.isSet(resetSettings))
+    {
+        appUserSettings.beginGroup("General");
+        appUserSettings.beginGroup("LastKnownDimensions");
 
-    settings.lastKnownSize = QSize(appUserSettings.value("width", -1).toInt(),
-        appUserSettings.value("height", -1).toInt());
+        settings.lastKnownSize = QSize(appUserSettings.value("width", -1).toInt(),
+            appUserSettings.value("height", -1).toInt());
 
-    appUserSettings.endGroup();
-    appUserSettings.endGroup();
+        appUserSettings.endGroup();
+        appUserSettings.endGroup();
+    }
 
     ParaBrowser w(settings);
     w.show();
