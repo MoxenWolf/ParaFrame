@@ -46,6 +46,7 @@ void ParaBrowser::uiCreate()
     layoutCentral->addWidget(frameTopInfo);
     QHBoxLayout* layoutTopInfo = new QHBoxLayout();
     frameTopInfo->setLayout(layoutTopInfo);
+
     QLabel* lblInterfaceVersionOutput = new QLabel();
     lblInterfaceVersionOutput->setFont(fontInfo);
     lblInterfaceVersionOutput->setText("Supporting ParaFrame Interfacing Versions: <b>[" + PARA_COMMON->INTERFACE_VERSION_SUPPORT.join("] [") + QString("]</b>"));
@@ -72,6 +73,17 @@ void ParaBrowser::uiCreate()
     layoutMiddleContentWrap->addWidget(frameMiddleCenter);
     frameMiddleCenter->setFrameStyle(topPanelStyle);
     frameMiddleCenter->setMinimumWidth(200);
+    QFormLayout* layoutMiddleCenter = new QFormLayout();
+    frameMiddleCenter->setLayout(layoutMiddleCenter);
+
+    QLabel* lblTestConnection = new QLabel("Event Horizon");
+    lblTestConnection->setFont(fontInteract);
+    QPushButton* btnTestConnection = new QPushButton("Connect");
+    btnTestConnection->setFont(fontInteract);
+    connect(btnTestConnection, &QPushButton::clicked, this, &ParaBrowser::slot_connect); //tmp
+
+    layoutMiddleCenter->addRow(lblTestConnection, btnTestConnection);
+
 
     /* Middle Right */
     QFrame* frameMiddleRight = new QFrame();
@@ -84,13 +96,29 @@ void ParaBrowser::uiCreate()
     layoutCentral->addWidget(frameBottom);
     frameBottom->setFrameStyle(topPanelStyle);
     frameBottom->setFixedHeight(50);
+    QHBoxLayout* layoutBottom = new QHBoxLayout();
+    frameBottom->setLayout(layoutBottom);
 
-    
-
-
+    lblStatusReturn = new QLabel("Return not yet received...");
+    lblStatusReturn->setFont(fontInfo);
+    layoutBottom->addWidget(lblStatusReturn);
 }
 
 void ParaBrowser::conSS()
 {
 
+}
+
+/* Slots */
+void ParaBrowser::slot_connect(bool checked)
+{
+    QPalette palette = QGuiApplication::palette();
+    // palette.setColor(QPalette::Active, QPalette::ColorRole::Window, QColor(QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255)));
+    palette.setColor(QPalette::Active, QPalette::ColorRole::Window, PARA_COMMON->getRandColor());
+    this->setPalette(palette);
+
+    ParaLib x;
+    int y = x.returnInt();
+
+    lblStatusReturn->setText("Return is: " + QString::number(y));
 }

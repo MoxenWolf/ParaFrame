@@ -1,9 +1,11 @@
 #pragma once
 
-#include "paralib_global.h"
+#include <QtCore/qglobal.h>
 
-class PARALIB_EXPORT ParaLib
+
+class ParaLib
 {
 public:
     ParaLib();
+    int returnInt();
 };
