@@ -3,15 +3,34 @@
 ParaBrowser::ParaBrowser(QWidget *parent)
     : QMainWindow(parent)
 {
-    this->setWindowTitle("ParaBrowser for ParaFrame v" + QString(PARAFRAME_VERSION));
+    this->setWindowTitle("ParaBrowser for ParaFrame v" + qApp->applicationVersion());
 
     QFrame* test = new QFrame();
 
     uiCreate();
 }
 
+ParaBrowser::ParaBrowser(ParaBrowserSettings& settings, QWidget* parent) : ParaBrowser(parent)
+{
+    m_settings = settings;
+    if (settings.lastKnownSize.width() > 20 && settings.lastKnownSize.height() > 20)
+    {
+        this->resize(m_settings.lastKnownSize);
+    }
+}
+
 ParaBrowser::~ParaBrowser()
 {}
+
+void ParaBrowser::closeEvent(QCloseEvent* event)
+{
+    m_settings.lastKnownSize = this->size();
+}
+
+const ParaBrowserSettings ParaBrowser::getSettings()
+{
+    return m_settings;
+}
 
 void ParaBrowser::uiCreate()
 {

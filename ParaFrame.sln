@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaBrowser", "ParaBrowser\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventHorizon", "EventHorizon\EventHorizon.vcxproj", "{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaLib", "ParaLib\ParaLib.vcxproj", "{F28937BE-4732-4009-980D-F47991964C1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Release|x64.Build.0 = Release|x64
 		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Release|x86.ActiveCfg = Release|Win32
 		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Release|x86.Build.0 = Release|Win32
+		{F28937BE-4732-4009-980D-F47991964C1C}.Debug|x64.ActiveCfg = Debug|x64
+		{F28937BE-4732-4009-980D-F47991964C1C}.Debug|x64.Build.0 = Debug|x64
+		{F28937BE-4732-4009-980D-F47991964C1C}.Debug|x86.ActiveCfg = Debug|x64
+		{F28937BE-4732-4009-980D-F47991964C1C}.Debug|x86.Build.0 = Debug|x64
+		{F28937BE-4732-4009-980D-F47991964C1C}.Release|x64.ActiveCfg = Release|x64
+		{F28937BE-4732-4009-980D-F47991964C1C}.Release|x64.Build.0 = Release|x64
+		{F28937BE-4732-4009-980D-F47991964C1C}.Release|x86.ActiveCfg = Release|x64
+		{F28937BE-4732-4009-980D-F47991964C1C}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

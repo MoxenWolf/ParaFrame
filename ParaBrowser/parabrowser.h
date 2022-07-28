@@ -4,9 +4,12 @@
 
 /*Core*/
 #include <QtCore/QObject>
+#include <QtWidgets/QApplication>
 #include <QtCore/QString>
 #include <QtCore/QVector>
 #include <QtCore/QStringList>
+#include <QtCore/QSize>
+#include <QCloseEvent>
 
 /*Widgets*/
 #include <QtWidgets/QWidget>
@@ -22,19 +25,28 @@
 /*Events*/
 /*Local*/
 
+struct ParaBrowserSettings
+{
+    QSize lastKnownSize{-1, -1};
+};
 
 class ParaBrowser : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    ParaBrowser(QWidget *parent = nullptr);
+    ParaBrowser(QWidget *parent = Q_NULLPTR);
+    ParaBrowser(ParaBrowserSettings& settings, QWidget* parent = Q_NULLPTR);
     ~ParaBrowser();
 
+    const ParaBrowserSettings getSettings();
+protected:
+    void closeEvent(QCloseEvent*) override;
 private:
     void uiCreate();
     void conSS();
 
+    ParaBrowserSettings m_settings;
     QFont fontInfo{ "consolas", 8};
     int topPanelStyle{ QFrame::Panel/* | QFrame::Sunken */};
 };
