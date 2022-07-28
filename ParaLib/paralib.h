@@ -42,6 +42,12 @@ namespace ParaLib
     };
 
     Q_GLOBAL_STATIC(ParaCommon, PARA_COMMON)
+
+    enum class PARAFRAME_ERROR {
+        PLUGIN_LOAD_FAILED_MODULE_NOT_FOUND,
+        PLUGIN_LOAD_FAILED_BAD_DEFINITION_FILE
+    };
+    Q_DECLARE_METATYPE(PARAFRAME_ERROR)
 }
 
 #ifdef _DEBUG
