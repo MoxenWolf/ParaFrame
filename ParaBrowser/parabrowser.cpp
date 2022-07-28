@@ -8,8 +8,6 @@ ParaBrowser::ParaBrowser(QWidget *parent)
     QFrame* test = new QFrame();
 
     uiCreate();
-
-    //this->adjustSize();
 }
 
 ParaBrowser::~ParaBrowser()
