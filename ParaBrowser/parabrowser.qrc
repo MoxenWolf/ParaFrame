@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file alias="logo_ico">resources/images/logonotext_square.ico</file>
+        <file alias="logo_png">resources/images/logonotext_square.png</file>
+    </qresource>
+</RCC>
