@@ -1,12 +1,51 @@
 #pragma once
 
+/*Core*/
 #include <QObject>
+#include <QtCore/QString>
+#include <QtCore/QList>
+#include <QtCore/QVector>
+#include <QtCore/QQueue>
+#include <QtCore/QStringList>
+#include <QtCore/QByteArray>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
+#include <QtCore/QIODevice>
+#include <QtCore/QLibrary>
+#include <QtCore/QJsonObject>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonValue>
+#include <QtCore/QJsonArray>
+#include <QtCore/QJsonValueRef>
 
-class ParaPlugin  : public QObject
-{
-	Q_OBJECT
+/*Local*/
+#include "paralib.h"
 
-public:
-	ParaPlugin(QObject *parent);
-	~ParaPlugin();
-};
+namespace ParaLib {
+
+	class ParaPlugin  : public QObject
+	{
+		Q_OBJECT
+
+	public:
+		ParaPlugin(QObject *parent);
+		~ParaPlugin();
+
+		ParaCommon::PARAFRAME_ERROR lastError();
+
+		bool loadPlugin(const QString&);
+	private:
+		QQueue<ParaCommon::PARAFRAME_ERROR> errors;
+
+		QString paraInterfaceVersionUsed;
+		QString paraPluginUsed;
+		QFileInfo paraPluginLocation;
+		QString paraName;
+		QString paraDescription;
+		//TODO QPixmap for png
+	};
+
+}
+
+

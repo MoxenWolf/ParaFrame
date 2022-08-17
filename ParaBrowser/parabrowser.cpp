@@ -114,7 +114,21 @@ void ParaBrowser::slot_connect(bool checked)
     palette.setColor(QPalette::Active, QPalette::ColorRole::Window, ParaLib::PARA_COMMON->getRandColor());
     this->setPalette(palette);
 
-    libEventHorizon = new QLibrary("C:/d21/ParaFrame/x64/Debug/DllEventHorizon.dll");
+    ParaLib::ParaPlugin* plugin = new ParaLib::ParaPlugin(this);
+
+    if (plugin->loadPlugin("C:/d21/ParaFrame/x64/Debug/sams_ship.para"))
+    {
+
+        PF_DEBUG("load successful");
+    }
+    else
+    {
+        PF_DEBUG("error" + QString::number((int)plugin->lastError()));
+    }
+
+
+    //SUCCESSFUL LIB LOAD
+    /*libEventHorizon = new QLibrary("C:/d21/ParaFrame/x64/Debug/DllEventHorizon.dll");
     libEventHorizon->load();
 
     if (libEventHorizon->isLoaded())
@@ -149,43 +163,5 @@ void ParaBrowser::slot_connect(bool checked)
                 PF_DEBUG(QString::fromStdString(value.front()));
             }
         }
-    }
-
-    /*if (libEventHorizon->isLoaded())
-    {
-        PF_DEBUG("loaded");
-        try
-        {
-            ehDoEmpty = (protoDoEmpty)libEventHorizon->resolve("doEmpty");
-            ehIncInt = (protoIncInt)libEventHorizon->resolve("incInt");
-        }
-        catch (...)
-        {
-            PF_DEBUG("resolve failed");
-        }
-
-        if (ehDoEmpty)
-        {
-            PF_DEBUG("...calling doEmpty...");
-            ehDoEmpty();
-
-            
-        }
-
-        if (ehIncInt)
-        {
-            PF_DEBUG("...calling incInt...");
-            int value = ehIncInt(10);
-            lblStatusReturn->setText("Post incInt(10): " + QString::number(value));
-        }
-        
-        
     }*/
-    
-
-
-    /*ParaLib::ParaCommon x;
-    lblStatusReturn->setText("Return is: " + QString::number(x.returnInt()));
-
-    PF_DEBUG("testing debug output")*/
 }

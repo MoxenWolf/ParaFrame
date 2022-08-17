@@ -36,6 +36,7 @@
 /*Events*/
 /*Local*/
 #include "paralib.h"
+#include "paraplugin.h"
 
 struct ParaBrowserSettings
 {

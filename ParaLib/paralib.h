@@ -23,8 +23,13 @@
 /*Events*/
 /*Local*/
 
-namespace ParaLib
-{
+#define PARAFRAME_VERSION "0.0.1"
+#define CURRENT_PARAFRAME_INTERFACE_VERSION "0.1a"
+
+namespace ParaLib {
+
+    /* *** Interface Defs *** */
+
     /* *** Utility *** */
     class ParaCommon : public QObject
     {
@@ -34,7 +39,7 @@ namespace ParaLib
         ParaCommon(QWidget* parent = Q_NULLPTR) : QObject{ parent } {};
         virtual ~ParaCommon() {}
 
-        const QStringList INTERFACE_VERSION_SUPPORT{ PARAFRAME_INTERFACE_VERSION};
+        const QStringList INTERFACE_VERSION_SUPPORT{ CURRENT_PARAFRAME_INTERFACE_VERSION };
 
         const QColor getRandColor()
         {
@@ -44,14 +49,18 @@ namespace ParaLib
         }
 
         enum class PARAFRAME_ERROR {
+            NO_ERROR = 0,
+            INDETERMINATE = 1,
+            PLUGIN_READ_ERROR,
+            PLUGIN_PARA_MALFORMED,
             PLUGIN_LOAD_FAILED_MODULE_NOT_FOUND,
             PLUGIN_LOAD_FAILED_BAD_DEFINITION_FILE
         };
     };
-
     Q_GLOBAL_STATIC(ParaCommon, PARA_COMMON);
     Q_DECLARE_METATYPE(ParaCommon::PARAFRAME_ERROR);
 }
+
 
 /* *** Macros and Defines*** */
 #ifdef _DEBUG

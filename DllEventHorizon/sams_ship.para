@@ -1,0 +1,7 @@
+{
+	"interface_version": "0.1a",
+	"plugin": "DllEventHorizon",
+	"name": "Sam's Ship",
+	"description": "Hell Ship",
+	"icon": "ship.png"
+}

@@ -147,6 +147,9 @@
     <ClInclude Include="eventhorizon.h" />
     <ClInclude Include="paraplugin.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="sams_ship.para" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
