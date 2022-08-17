@@ -1,20 +1,21 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
-//#include "eventhorizonplugin.h"
-
-#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
-// Windows Header Files
+#define WIN32_LEAN_AND_MEAN 
 #include <windows.h>
+
+#include "eventhorizon.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
                      )
 {
+    OutputDebugString(L"...dllmain ...");
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        /*ParaPlugin::pluginEnableExtern = ParaPlugin::pluginEnable;
-        ParaPlugin::pluginDisableExtern = ParaPlugin::pluginDisable;*/
+        ParaPlugin::pluginEnableExport = ParaPlugin::pluginEnable;
+        ParaPlugin::pluginDisableExport = ParaPlugin::pluginDisable;
+        OutputDebugString(L"...attach ...");
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:

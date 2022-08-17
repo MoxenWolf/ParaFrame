@@ -1,6 +1,9 @@
 #pragma once
 
+#include <string>
+#include <list>
 #include <source_location>
+#include <iostream>
 
 /*Core*/
 #include <QtCore/QObject>
@@ -13,6 +16,9 @@
 #include <QtGui/QPalette>
 #include <QtGui/QColor>
 #include <QtCore/QRandomGenerator>
+
+#include <QFileInfo>
+#include <QLibrary>
 
 /*Widgets*/
 #include <QtWidgets/QWidget>
@@ -36,6 +42,16 @@ struct ParaBrowserSettings
     QSize lastKnownSize{-1, -1};
 };
 
+//typedef void (*protoDoEmpty)();
+//typedef void (*protoDoInt)(int);
+//typedef int (*protoIncInt)(int);
+//typedef void (*protoDoString)(std::string);
+//typedef std::string (*protoRetString)(std::string);
+
+typedef int (*protoPluginEnable)();
+typedef int (*protoPluginDisable)();
+typedef std::list<std::string>(*protoPluginGetInterfaceVersion)();
+
 class ParaBrowser : public QMainWindow
 {
     Q_OBJECT
@@ -58,6 +74,18 @@ private:
     QFont fontInfo{ "consolas", 8};
     QFont fontInteract{ "consolas", 10 };
     int topPanelStyle{ QFrame::Panel/* | QFrame::Sunken */};
+
+    QLibrary* libEventHorizon;
+    protoPluginEnable pluginEnable = Q_NULLPTR;
+    protoPluginDisable pluginDisable = Q_NULLPTR;
+    protoPluginGetInterfaceVersion getInterfaceVersion = Q_NULLPTR;
+
+
+    /*protoDoEmpty ehDoEmpty = Q_NULLPTR;
+    protoDoInt ehDoInt;
+    protoIncInt ehIncInt = Q_NULLPTR;
+    protoDoString ehDoString;
+    protoRetString ehRetString;*/
 private slots:
     void slot_connect(bool);
 };

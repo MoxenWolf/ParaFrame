@@ -115,8 +115,81 @@ void ParaBrowser::slot_connect(bool checked)
     palette.setColor(QPalette::Active, QPalette::ColorRole::Window, ParaLib::PARA_COMMON->getRandColor());
     this->setPalette(palette);
 
-    ParaLib::ParaCommon x;
+    libEventHorizon = new QLibrary("C:/d21/ParaFrame/x64/Debug/DllEventHorizon.dll");
+    libEventHorizon->load();
+
+    if (libEventHorizon->isLoaded())
+    {
+        PF_DEBUG("loaded...");
+
+        try
+        {
+            /*this->pluginEnable = (protoPluginEnable)libEventHorizon->resolve("pluginEnableExport");
+            this->pluginDisable = (protoPluginDisable)libEventHorizon->resolve("pluginDisableExport");*/
+
+            this->pluginEnable = (protoPluginEnable)libEventHorizon->resolve("pluginEnableExport");
+            this->pluginDisable = (protoPluginDisable)libEventHorizon->resolve("pluginDisable");
+            this->getInterfaceVersion = (protoPluginGetInterfaceVersion)libEventHorizon->resolve("getInterfaceVersion");
+
+            PF_DEBUG("resolve success...");
+        }
+        catch (...)
+        {
+            PF_DEBUG("resolve failed...");
+        }
+
+        if (this->pluginEnable)
+        {
+            PF_DEBUG("calling pluginEnable...");
+            int value = this->pluginEnable();
+            lblStatusReturn->setText("Value: " + QString::number(value));
+        }
+
+        if (this->getInterfaceVersion)
+        {
+            std::list<std::string> value = this->getInterfaceVersion();
+            if (value.size() > 0)
+            {
+                PF_DEBUG(QString::fromStdString(value.front()));
+            }
+        }
+    }
+
+    /*if (libEventHorizon->isLoaded())
+    {
+        PF_DEBUG("loaded");
+        try
+        {
+            ehDoEmpty = (protoDoEmpty)libEventHorizon->resolve("doEmpty");
+            ehIncInt = (protoIncInt)libEventHorizon->resolve("incInt");
+        }
+        catch (...)
+        {
+            PF_DEBUG("resolve failed");
+        }
+
+        if (ehDoEmpty)
+        {
+            PF_DEBUG("...calling doEmpty...");
+            ehDoEmpty();
+
+            
+        }
+
+        if (ehIncInt)
+        {
+            PF_DEBUG("...calling incInt...");
+            int value = ehIncInt(10);
+            lblStatusReturn->setText("Post incInt(10): " + QString::number(value));
+        }
+        
+        
+    }*/
+    
+
+
+    /*ParaLib::ParaCommon x;
     lblStatusReturn->setText("Return is: " + QString::number(x.returnInt()));
 
-    PF_DEBUG("testing debug output")
+    PF_DEBUG("testing debug output")*/
 }

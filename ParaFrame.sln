@@ -5,9 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaBrowser", "ParaBrowser\ParaBrowser.vcxproj", "{05322C45-C437-480A-88E0-CB219BC13DE8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventHorizon", "EventHorizon\EventHorizon.vcxproj", "{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaLib", "ParaLib\ParaLib.vcxproj", "{F28937BE-4732-4009-980D-F47991964C1C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DllEventHorizon", "DllEventHorizon\DllEventHorizon.vcxproj", "{A4C00636-C454-4521-8A7B-F747932159D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,6 @@ Global
 		{05322C45-C437-480A-88E0-CB219BC13DE8}.Release|x64.Build.0 = Release|x64
 		{05322C45-C437-480A-88E0-CB219BC13DE8}.Release|x86.ActiveCfg = Release|x64
 		{05322C45-C437-480A-88E0-CB219BC13DE8}.Release|x86.Build.0 = Release|x64
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Debug|x64.ActiveCfg = Debug|x64
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Debug|x64.Build.0 = Debug|x64
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Debug|x86.ActiveCfg = Debug|Win32
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Debug|x86.Build.0 = Debug|Win32
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Release|x64.ActiveCfg = Release|x64
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Release|x64.Build.0 = Release|x64
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Release|x86.ActiveCfg = Release|Win32
-		{0BD88DE4-B7AF-42DC-9D2A-DDF0247E304C}.Release|x86.Build.0 = Release|Win32
 		{F28937BE-4732-4009-980D-F47991964C1C}.Debug|x64.ActiveCfg = Debug|x64
 		{F28937BE-4732-4009-980D-F47991964C1C}.Debug|x64.Build.0 = Debug|x64
 		{F28937BE-4732-4009-980D-F47991964C1C}.Debug|x86.ActiveCfg = Debug|x64
@@ -41,6 +33,14 @@ Global
 		{F28937BE-4732-4009-980D-F47991964C1C}.Release|x64.Build.0 = Release|x64
 		{F28937BE-4732-4009-980D-F47991964C1C}.Release|x86.ActiveCfg = Release|x64
 		{F28937BE-4732-4009-980D-F47991964C1C}.Release|x86.Build.0 = Release|x64
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Debug|x64.ActiveCfg = Debug|x64
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Debug|x64.Build.0 = Debug|x64
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Debug|x86.ActiveCfg = Debug|Win32
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Debug|x86.Build.0 = Debug|Win32
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Release|x64.ActiveCfg = Release|x64
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Release|x64.Build.0 = Release|x64
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Release|x86.ActiveCfg = Release|Win32
+		{A4C00636-C454-4521-8A7B-F747932159D1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
