@@ -9,13 +9,10 @@ BOOL APIENTRY DllMain( HMODULE hModule,
                        LPVOID lpReserved
                      )
 {
-    OutputDebugString(L"...dllmain ...");
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        ParaPlugin::pluginEnableExport = ParaPlugin::pluginEnable;
-        ParaPlugin::pluginDisableExport = ParaPlugin::pluginDisable;
-        OutputDebugString(L"...attach ...");
+        OutputDebugString(L"Attaching...\n");
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:

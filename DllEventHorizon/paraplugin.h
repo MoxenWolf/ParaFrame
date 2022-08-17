@@ -8,14 +8,9 @@
 
 namespace ParaPlugin
 {
-	std::list<std::string> INTERFACE_VERSION{ "0.1a", };
-	PARAPLUGIN_EXPORT std::list<std::string> getInterfaceVersion()
+	const std::list<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a", };
+	PARAPLUGIN_EXPORT const std::list<std::string> getSupportedInterfaceVersions()
 	{
-		return INTERFACE_VERSION;
+		return SUPPORTED_INTERFACE_VERSIONS;
 	}
-
-
-	extern "C" __declspec(dllexport) int (*pluginEnableExport)() = 0;
-	extern "C" __declspec(dllexport) int (*pluginDisableExport)() = 0;
-
 }

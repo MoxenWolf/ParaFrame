@@ -124,12 +124,9 @@ void ParaBrowser::slot_connect(bool checked)
 
         try
         {
-            /*this->pluginEnable = (protoPluginEnable)libEventHorizon->resolve("pluginEnableExport");
-            this->pluginDisable = (protoPluginDisable)libEventHorizon->resolve("pluginDisableExport");*/
-
-            this->pluginEnable = (protoPluginEnable)libEventHorizon->resolve("pluginEnableExport");
+            this->pluginEnable = (protoPluginEnable)libEventHorizon->resolve("pluginEnable");
             this->pluginDisable = (protoPluginDisable)libEventHorizon->resolve("pluginDisable");
-            this->getInterfaceVersion = (protoPluginGetInterfaceVersion)libEventHorizon->resolve("getInterfaceVersion");
+            this->getSupportedInterfaceVersions = (protoPluginGetInterfaceVersion)libEventHorizon->resolve("getSupportedInterfaceVersions");
 
             PF_DEBUG("resolve success...");
         }
@@ -145,9 +142,9 @@ void ParaBrowser::slot_connect(bool checked)
             lblStatusReturn->setText("Value: " + QString::number(value));
         }
 
-        if (this->getInterfaceVersion)
+        if (this->getSupportedInterfaceVersions)
         {
-            std::list<std::string> value = this->getInterfaceVersion();
+            std::list<std::string> value = this->getSupportedInterfaceVersions();
             if (value.size() > 0)
             {
                 PF_DEBUG(QString::fromStdString(value.front()));

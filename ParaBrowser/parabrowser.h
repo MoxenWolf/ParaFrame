@@ -78,7 +78,7 @@ private:
     QLibrary* libEventHorizon;
     protoPluginEnable pluginEnable = Q_NULLPTR;
     protoPluginDisable pluginDisable = Q_NULLPTR;
-    protoPluginGetInterfaceVersion getInterfaceVersion = Q_NULLPTR;
+    protoPluginGetInterfaceVersion getSupportedInterfaceVersions = Q_NULLPTR;
 
 
     /*protoDoEmpty ehDoEmpty = Q_NULLPTR;
