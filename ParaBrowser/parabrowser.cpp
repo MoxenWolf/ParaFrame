@@ -111,7 +111,6 @@ void ParaBrowser::conSS()
 void ParaBrowser::slot_connect(bool checked)
 {
     QPalette palette = QGuiApplication::palette();
-    // palette.setColor(QPalette::Active, QPalette::ColorRole::Window, QColor(QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255)));
     palette.setColor(QPalette::Active, QPalette::ColorRole::Window, ParaLib::PARA_COMMON->getRandColor());
     this->setPalette(palette);
 

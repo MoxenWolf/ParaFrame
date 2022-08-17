@@ -75,7 +75,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>PARALIB_LIB;BUILD_STATIC;PARAFRAME_INTERFACE_VERSION="1.0";PARAFRAME_VERSION="0.0.1";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PARALIB_LIB;BUILD_STATIC;PARAFRAME_INTERFACE_VERSION="0.1a";PARAFRAME_VERSION="0.0.1";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -89,7 +89,7 @@
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>PARALIB_LIB;BUILD_STATIC;PARAFRAME_INTERFACE_VERSION="1.0";PARAFRAME_VERSION="0.0.1";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PARALIB_LIB;BUILD_STATIC;PARAFRAME_INTERFACE_VERSION="0.1a";PARAFRAME_VERSION="0.0.1";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -98,7 +98,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtMoc Include="paralib.h" />
-    <ClCompile Include="paralib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="paraplugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="paraplugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -25,35 +25,37 @@
 
 namespace ParaLib
 {
+    /* *** Utility *** */
     class ParaCommon : public QObject
     {
         Q_OBJECT
 
     public:
-        ParaCommon(QWidget* parent = Q_NULLPTR);
+        ParaCommon(QWidget* parent = Q_NULLPTR) : QObject{ parent } {};
         virtual ~ParaCommon() {}
 
-        int returnInt();
-
-        const QStringList INTERFACE_VERSION_SUPPORT{ PARAFRAME_INTERFACE_VERSION, "0.5" };
+        const QStringList INTERFACE_VERSION_SUPPORT{ PARAFRAME_INTERFACE_VERSION};
 
         const QColor getRandColor()
         {
-            return QColor(QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255), QRandomGenerator::global()->bounded(255));
+            return QColor(QRandomGenerator::global()->bounded(255), 
+                QRandomGenerator::global()->bounded(255), 
+                QRandomGenerator::global()->bounded(255));
         }
+
+        enum class PARAFRAME_ERROR {
+            PLUGIN_LOAD_FAILED_MODULE_NOT_FOUND,
+            PLUGIN_LOAD_FAILED_BAD_DEFINITION_FILE
+        };
     };
 
-    Q_GLOBAL_STATIC(ParaCommon, PARA_COMMON)
-
-    enum class PARAFRAME_ERROR {
-        PLUGIN_LOAD_FAILED_MODULE_NOT_FOUND,
-        PLUGIN_LOAD_FAILED_BAD_DEFINITION_FILE
-    };
-    Q_DECLARE_METATYPE(PARAFRAME_ERROR)
+    Q_GLOBAL_STATIC(ParaCommon, PARA_COMMON);
+    Q_DECLARE_METATYPE(ParaCommon::PARAFRAME_ERROR);
 }
 
+/* *** Macros and Defines*** */
 #ifdef _DEBUG
-#include <QtCore/qdebug.h>
+#include <QtCore/QDebug>
 #include <source_location>
 
 #define PF_DEBUG(message) {\
