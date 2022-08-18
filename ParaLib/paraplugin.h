@@ -3,6 +3,7 @@
 /*Core*/
 #include <QObject>
 #include <QtCore/QString>
+#include <QtCore/QSet>
 #include <QtCore/QList>
 #include <QtCore/QVector>
 #include <QtCore/QQueue>
@@ -44,6 +45,12 @@ namespace ParaLib {
 		QString paraName;
 		QString paraDescription;
 		//TODO QPixmap for png
+
+		QLibrary* pluginLib = Q_NULLPTR;
+
+		/* interfaces into plugin */
+		ParaLib::IgetSupportedFunctions getSupportedFunctions;
+
 	};
 
 }

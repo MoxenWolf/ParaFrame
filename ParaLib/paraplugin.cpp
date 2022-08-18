@@ -45,7 +45,36 @@ bool ParaPlugin::loadPlugin(const QString& path)
 				paraName = jsonDoc.object().contains("name") ? jsonDoc["name"].toString() : paraFileInfo.baseName();
 				paraDescription = jsonDoc.object().contains("description") ? jsonDoc["description"].toString() : "";
 
-				success = true;
+				/* *** load plugin library *** */
+				pluginLib = new QLibrary(paraPluginLocation.canonicalFilePath());
+				pluginLib->load();
+
+				if (pluginLib->isLoaded())
+				{
+					try
+					{
+						getSupportedFunctions = (ParaLib::IgetSupportedFunctions)pluginLib->resolve("getSupportedFunctions");
+					}
+					catch (...)
+					{
+						errors.enqueue(ParaCommon::PARAFRAME_ERROR::PLUGIN_LIB_CRITICAL_FUNCTION_NOT_RESOLVED);
+					}
+					
+					if (getSupportedFunctions)
+					{
+						//QList<QString> value((std::list<std::string>)getSupportedFunctions());
+						std::list<std::string> value = getSupportedFunctions();
+						
+						PF_DEBUG(QString::fromStdString(value.front()));
+						success = true;
+					}
+					
+					
+				}
+				else
+				{
+					errors.enqueue(ParaCommon::PARAFRAME_ERROR::PLUGIN_LIB_CANNOT_LOAD);
+				}
 			}
 			else
 			{

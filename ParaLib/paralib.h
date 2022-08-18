@@ -4,6 +4,9 @@
 
 //#include "paraplugin.h"
 
+/*stdlib*/
+#include <string>
+#include <list>
 #include <source_location>
 
 /*Core*/
@@ -29,6 +32,10 @@
 namespace ParaLib {
 
     /* *** Interface Defs *** */
+    typedef int (*IdeviceStartup)();
+    typedef int (*IdeviceShutdown)();
+    typedef std::list<std::string> (*IgetSupportedFunctions)();
+    
 
     /* *** Utility *** */
     class ParaCommon : public QObject
@@ -53,8 +60,8 @@ namespace ParaLib {
             INDETERMINATE = 1,
             PLUGIN_READ_ERROR,
             PLUGIN_PARA_MALFORMED,
-            PLUGIN_LOAD_FAILED_MODULE_NOT_FOUND,
-            PLUGIN_LOAD_FAILED_BAD_DEFINITION_FILE
+            PLUGIN_LIB_CANNOT_LOAD,
+            PLUGIN_LIB_CRITICAL_FUNCTION_NOT_RESOLVED
         };
     };
     Q_GLOBAL_STATIC(ParaCommon, PARA_COMMON);
