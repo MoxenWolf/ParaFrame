@@ -6,6 +6,15 @@
 
 namespace ParaPlugin
 {
+	class EventHorizon : public IParaBase
+	{
+		int pluginEnable()
+		{
+			return 43;
+		}
+	};
+
+
 	/* *** ParaFrame Required *** */
 	int pluginEnable()
 	{

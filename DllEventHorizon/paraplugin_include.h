@@ -10,6 +10,16 @@ typedef int (*pluginEnabled)();
 
 namespace ParaPlugin
 {
+	class IParaBase
+	{
+		std::vector<std::string> getSupportedFunctions()
+		{
+			return std::vector<std::string>{"pluginEnable_translator"};
+		}
+
+		virtual int pluginEnable() = 0;
+	};
+
 	const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a", };
 	/*PARAPLUGIN_EXPORT const std::list<std::string> getSupportedInterfaceVersions()
 	{
