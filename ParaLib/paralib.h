@@ -34,7 +34,9 @@ namespace ParaLib {
     /* *** Interface Defs *** */
     typedef int (*IdeviceStartup)();
     typedef int (*IdeviceShutdown)();
-    typedef std::list<std::string> (*IgetSupportedFunctions)();
+
+    typedef std::vector<std::string> (*IgetSupportedFunctions)();
+    typedef int (*IpluginEnable)();
     
 
     /* *** Utility *** */

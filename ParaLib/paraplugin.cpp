@@ -54,6 +54,7 @@ bool ParaPlugin::loadPlugin(const QString& path)
 					try
 					{
 						getSupportedFunctions = (ParaLib::IgetSupportedFunctions)pluginLib->resolve("getSupportedFunctions");
+						pluginEnable = (ParaLib::IpluginEnable)pluginLib->resolve("pluginEnable_translator");
 					}
 					catch (...)
 					{
@@ -63,9 +64,16 @@ bool ParaPlugin::loadPlugin(const QString& path)
 					if (getSupportedFunctions)
 					{
 						//QList<QString> value((std::list<std::string>)getSupportedFunctions());
-						std::list<std::string> value = getSupportedFunctions();
+						std::vector<std::string> value = getSupportedFunctions();
 						
 						PF_DEBUG(QString::fromStdString(value.front()));
+						success = true;
+					}
+
+					if (pluginEnable)
+					{
+						int value = pluginEnable();
+						PF_DEBUG(QString::number(value));
 						success = true;
 					}
 					

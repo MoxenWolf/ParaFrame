@@ -50,6 +50,7 @@ namespace ParaLib {
 
 		/* interfaces into plugin */
 		ParaLib::IgetSupportedFunctions getSupportedFunctions;
+		ParaLib::IpluginEnable pluginEnable;
 
 	};
 

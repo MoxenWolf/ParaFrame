@@ -1,13 +1,13 @@
 #pragma once
 
-#include "paraplugin.h"
+#include "paraplugin_include.h"
 
 #include <string>
 
 namespace ParaPlugin
 {
 	/* *** ParaFrame Required *** */
-	PARAPLUGIN_EXPORT int pluginEnable()
+	int pluginEnable()
 	{
 		int returnCode = 42;
 

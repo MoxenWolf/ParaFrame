@@ -119,6 +119,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y $(ProjectDir)sams_ship.para $(TargetDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -145,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="eventhorizon.h" />
-    <ClInclude Include="paraplugin.h" />
+    <ClInclude Include="paraplugin_include.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sams_ship.para" />
