@@ -49,7 +49,19 @@ namespace ParaPlugin
 		if (g_plugin)
 		{	
 			int value = g_plugin->pluginEnable();
+			if (value > 0 && g_plugin->pluginEnabled)
+			{
+				g_plugin->pluginEnabled();
+			}
 			return value;
+		}
+	}
+
+	PARAPLUGIN_EXPORT void setCbPluginEnabled(void(*cb)())
+	{
+		if (g_plugin)
+		{
+			g_plugin->setPluginEnabledCb(cb);
 		}
 	}
 }

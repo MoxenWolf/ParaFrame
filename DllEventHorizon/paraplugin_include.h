@@ -22,6 +22,13 @@ namespace ParaPlugin
 			return std::vector<std::string>{"pluginEnable_translator"};
 		}
 
+		void(*pluginEnabled)() = nullptr;
+
+		void setPluginEnabledCb(void(*callback)())
+		{
+			pluginEnabled = callback;
+		}
+
 		virtual int pluginEnable() = 0;
 	};
 }
