@@ -25,6 +25,18 @@ namespace ParaPlugin
 
 	EventHorizon* g_plugin;
 
+	PARAPLUGIN_EXPORT void getSupportedFunctions_translator(char ** out_supportedFunctions)
+	{
+		std::string result = "";
+		for (std::string value : g_plugin->SUPPORTED_FUNCTIONS)
+		{
+			result.append(value);
+			result.append(",");
+		}
+		
+		*out_supportedFunctions = _strdup(result.c_str());
+	}
+
 	PARAPLUGIN_EXPORT int pluginEnable_translator()
 	{
 		if (g_plugin)
