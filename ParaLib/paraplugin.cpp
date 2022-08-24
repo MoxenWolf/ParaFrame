@@ -7,7 +7,15 @@ ParaPlugin::ParaPlugin(QObject *parent)
 {}
 
 ParaPlugin::~ParaPlugin()
-{}
+{
+	if (pluginLib)
+	{
+		PF_DEBUG("unloading pre");
+		pluginLib->unload();
+		PF_DEBUG("unloading post");
+	}
+	
+}
 
 ParaCommon::PARAFRAME_ERROR ParaPlugin::lastError()
 {
