@@ -4,12 +4,6 @@
 
 #include "eventhorizon.h"
 
-namespace externed
-{
-    ParaPlugin::EventHorizon* g_plugin;
-}
-
-
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
@@ -21,23 +15,16 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
         
     case DLL_PROCESS_ATTACH:
-        OutputDebugString(L"\nAttaching...\n");
-        externed::g_plugin = new ParaPlugin::EventHorizon;
-        value = externed::g_plugin->pluginEnable();
-        OutputDebugString(L"\n...after value assinment\n");
+        ParaPlugin::g_plugin = new ParaPlugin::EventHorizon;
         break;
     case DLL_THREAD_ATTACH:
-        
         break;
     case DLL_THREAD_DETACH:
-        
         break;
     case DLL_PROCESS_DETACH:
-        if (externed::g_plugin)
+        if (ParaPlugin::g_plugin)
         {
-            OutputDebugString(L"\n...detaching...\n");
-            delete externed::g_plugin;
-            externed::g_plugin = nullptr;
+            delete ParaPlugin::g_plugin;
         }
         break;
     }

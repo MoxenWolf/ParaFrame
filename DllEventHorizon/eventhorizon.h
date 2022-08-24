@@ -11,7 +11,7 @@ namespace ParaPlugin
 	public:
 		EventHorizon()
 		{
-			//
+			//perform any needed plugin init...
 		}
 		~EventHorizon() {}
 
@@ -20,49 +20,19 @@ namespace ParaPlugin
 			return 43;
 		}
 	};
-}
 
-namespace externed
-{
-	extern ParaPlugin::EventHorizon* g_plugin;
-}
-
-namespace ParaPlugin
-{
 	/* *** DO NOT ALTER BELOW *** */
 
-	
+	EventHorizon* g_plugin;
 
 	PARAPLUGIN_EXPORT int pluginEnable_translator()
 	{
-		if (externed::g_plugin)
+		if (g_plugin)
 		{
 			
-			int value = externed::g_plugin->pluginEnable();
+			int value = g_plugin->pluginEnable();
 			return value;
 		}
 	}
-
-	//legacy ...
-
-	/* *** ParaFrame Required *** */
-	//int pluginEnable()
-	//{
-	//	int returnCode = 42;
-
-	//	//implement pluginEnable
-
-	//	return returnCode;
-	//}
-
-	///* *** ParaFrame Required *** */
-	//PARAPLUGIN_EXPORT int pluginDisable()
-	//{
-	//	int returnCode = 42;
-
-	//	//implement pluginDisable
-
-	//	return returnCode;
-	//}
 }
 
