@@ -34,7 +34,11 @@ namespace ParaPlugin
 			result.append(",");
 		}
 		
-		*out_supportedFunctions = _strdup(result.c_str());
+		unsigned long long size = strlen(result.c_str()) + 1;
+		char* x = new char[size];
+		strcpy_s(x, size, result.c_str());
+		
+		*out_supportedFunctions = x;
 	}
 
 	PARAPLUGIN_EXPORT int pluginEnable_translator()

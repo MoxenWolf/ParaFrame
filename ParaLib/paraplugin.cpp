@@ -76,6 +76,7 @@ bool ParaPlugin::loadPlugin(const QString& path)
 						char* supportedFunctions;
 						getSupportedFunctions(&supportedFunctions);
 						std::string value{ supportedFunctions };
+						delete supportedFunctions;
 						
 						//PF_DEBUG(QString::fromStdString(value.front()));
 						PF_DEBUG(QString::fromStdString(value));
