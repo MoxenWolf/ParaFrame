@@ -37,6 +37,8 @@ namespace ParaLib {
 
     typedef void (*IgetSupportedFunctions)(char**);
     typedef int (*IpluginEnable)();
+    typedef void (*IsetPluginEnabled)(void(*cb)());
+    typedef void (*voidCb)();
     
 
     /* *** Utility *** */

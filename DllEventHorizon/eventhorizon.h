@@ -17,6 +17,9 @@ namespace ParaPlugin
 
 		int pluginEnable()
 		{
+			//do stuff to enable plugin
+
+			pluginEnabled(); //call to plugin manager
 			return 43;
 		}
 	};
@@ -49,15 +52,15 @@ namespace ParaPlugin
 		if (g_plugin)
 		{	
 			int value = g_plugin->pluginEnable();
-			if (value > 0 && g_plugin->pluginEnabled)
+			/*if (value > 0 && g_plugin->pluginEnabled)
 			{
 				g_plugin->pluginEnabled();
-			}
+			}*/
 			return value;
 		}
 	}
 
-	PARAPLUGIN_EXPORT void setCbPluginEnabled(void(*cb)())
+	PARAPLUGIN_EXPORT void setCbPluginEnabled_translator(void(*cb)())
 	{
 		if (g_plugin)
 		{

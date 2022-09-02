@@ -4,7 +4,10 @@ using namespace ParaLib;
 
 ParaPlugin::ParaPlugin(QObject *parent)
 	: QObject(parent)
-{}
+{
+	fnptr.pluginEnabled_bound = &ParaPlugin::pluginEnabled_bound;
+
+}
 
 ParaPlugin::~ParaPlugin()
 {
@@ -63,6 +66,7 @@ bool ParaPlugin::loadPlugin(const QString& path)
 					{
 						getSupportedFunctions = (ParaLib::IgetSupportedFunctions)pluginLib->resolve("getSupportedFunctions_translator");
 						pluginEnable = (ParaLib::IpluginEnable)pluginLib->resolve("pluginEnable_translator");
+						setPluginEnabledCb = (ParaLib::IsetPluginEnabled)pluginLib->resolve("setCbPluginEnabled_translator");
 					}
 					catch (...)
 					{
@@ -83,14 +87,25 @@ bool ParaPlugin::loadPlugin(const QString& path)
 						success = true;
 					}
 
+					if (setPluginEnabledCb)
+					{
+						//setPluginEnabledCb(&ParaLib::pluginEnabled_test);
+						//setPluginEnabledCb(&ParaLib::ParaPlugin::pluginEnabled_static);
+						//setPluginEnabledCb(&ParaPlugin::pluginEnabled_bound);
+						//void* (*object_ptr)() = &pluginEnabled_bound;
+
+						setPluginEnabledCb(fnptr.test);
+
+						PF_DEBUG("setPluginEnabledCb resolved...");
+						success = true;
+					}
+
 					if (pluginEnable)
 					{
 						int value = pluginEnable();
 						PF_DEBUG(QString::number(value));
 						success = true;
 					}
-					
-					
 				}
 				else
 				{
@@ -115,4 +130,17 @@ bool ParaPlugin::loadPlugin(const QString& path)
 	return success;
 }
 
+void ParaLib::ParaPlugin::pluginEnabled_static()
+{
+	PF_DEBUG("inside pluginEnabled (static)");
+}
 
+void ParaLib::ParaPlugin::pluginEnabled_bound()
+{
+	PF_DEBUG("inside pluginEnabled (bound)");
+}
+
+void ParaLib::pluginEnabled_test()
+{
+	PF_DEBUG("inside pluginEnabled (solo)...");
+}

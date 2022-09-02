@@ -17,6 +17,8 @@ namespace ParaPlugin
 		const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a", };
 		const std::vector<std::string> SUPPORTED_FUNCTIONS{ "getSupportedFunctions_translator", "pluginEnable_translator" };
 
+		int pluginId{0};
+
 		std::vector<std::string> getSupportedFunctions()
 		{
 			return std::vector<std::string>{"pluginEnable_translator"};
@@ -28,7 +30,14 @@ namespace ParaPlugin
 		{
 			pluginEnabled = callback;
 		}
+		
+		void setPluginId(int id)
+		{
+			pluginId = id;
+		}
 
 		virtual int pluginEnable() = 0;
 	};
+
+	
 }

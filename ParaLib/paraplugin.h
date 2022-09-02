@@ -36,6 +36,13 @@ namespace ParaLib {
 		ParaCommon::PARAFRAME_ERROR lastError();
 
 		bool loadPlugin(const QString&);
+
+		union u_pcast
+		{
+			void (ParaPlugin::*pluginEnabled_bound)();
+			void (*test)();
+		}fnptr;
+
 	private:
 		QQueue<ParaCommon::PARAFRAME_ERROR> errors;
 
@@ -51,8 +58,18 @@ namespace ParaLib {
 		/* interfaces into plugin */
 		ParaLib::IgetSupportedFunctions getSupportedFunctions;
 		ParaLib::IpluginEnable pluginEnable;
+		ParaLib::IsetPluginEnabled setPluginEnabledCb;
 
+		static void pluginEnabled_static();
+		void pluginEnabled_bound();
 	};
+
+	void pluginEnabled_test();
+
+	
+
+	
+	
 
 }
 
