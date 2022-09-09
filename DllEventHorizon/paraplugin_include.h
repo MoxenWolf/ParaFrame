@@ -11,7 +11,7 @@ typedef int (*pluginEnabled)();
 
 namespace ParaPlugin
 {
-	class IParaBase
+	class IParaBase //TODO: probably change to struct and put in a virtual destructor
 	{
 	public:
 		const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a", };
@@ -37,6 +37,11 @@ namespace ParaPlugin
 		}
 
 		virtual int pluginEnable() = 0;
+	};
+
+	struct ICamera
+	{
+
 	};
 
 	

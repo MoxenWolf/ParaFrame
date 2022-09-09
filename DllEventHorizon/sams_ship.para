@@ -3,5 +3,8 @@
 	"plugin": "DllEventHorizon",
 	"name": "Sam's Ship",
 	"description": "Hell Ship",
-	"icon": "ship.png"
+	"icon": "ship.png",
+	"fault_catalog": ["FAULT1", "FAULT2"],
+	"custom_properties": ["myprop": 1.0],
 }
+

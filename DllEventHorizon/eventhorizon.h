@@ -6,7 +6,7 @@
 
 namespace ParaPlugin
 {
-	class EventHorizon : public IParaBase
+	class EventHorizon : public IParaBase, public ICamera
 	{
 	public:
 		EventHorizon()
