@@ -6,7 +6,7 @@
 
 namespace ParaPlugin
 {
-	class EventHorizon : public IParaBase, public ICamera
+	class EventHorizon : public IParaBase, public ISwitchable
 	{
 	public:
 		EventHorizon()
@@ -28,22 +28,26 @@ namespace ParaPlugin
 
 	EventHorizon* g_plugin = nullptr;
 
+	const std::vector<std::string> INTERFACES{ "IParaBase, ISwitchable" };
+
+	PARAPLUGIN_EXPORT void getInterfaces(char** out_interfaces)
+	{
+		std::string result = "";
+
+	}
+
 	PARAPLUGIN_EXPORT void getSupportedFunctions_translator(char ** out_supportedFunctions)
 	{
 		if (g_plugin)
 		{
-			std::string result = "";
+			/*std::string result = "";
 			for (std::string value : g_plugin->SUPPORTED_FUNCTIONS)
 			{
 				result.append(value);
 				result.append(",");
-			}
+			}*/
 
-			unsigned long long size = strlen(result.c_str()) + 1;
-			char* x = new char[size];
-			strcpy_s(x, size, result.c_str());
-
-			*out_supportedFunctions = x;
+			*out_supportedFunctions = translateStr(toJoinedStr(g_plugin->SUPPORTED_FUNCTIONS));
 		}
 	}
 
