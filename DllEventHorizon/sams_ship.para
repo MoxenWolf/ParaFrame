@@ -5,6 +5,6 @@
 	"description": "Hell Ship",
 	"icon": "ship.png",
 	"fault_catalog": ["FAULT1", "FAULT2"],
-	"custom_properties": ["myprop": 1.0],
+	"custom_properties": {"myprop": 1.0}
 }
 
