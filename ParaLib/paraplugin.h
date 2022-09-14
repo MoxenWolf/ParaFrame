@@ -60,17 +60,10 @@ namespace ParaLib {
 		ParaLib::IpluginEnable pluginEnable;
 		ParaLib::IsetPluginEnabled setPluginEnabledCb;
 
-		static void pluginEnabled_static();
+		ParaLib::IParaBase iParaBase; // all f() pointers for IParaBase
+
 		void pluginEnabled_bound();
 	};
-
-	void pluginEnabled_test();
-
-	
-
-	
-	
-
 }
 
 

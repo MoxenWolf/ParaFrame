@@ -28,30 +28,22 @@ namespace ParaPlugin
 
 	EventHorizon* g_plugin = nullptr;
 
-	const std::vector<std::string> INTERFACES{ "IParaBase, ISwitchable" };
+	const std::vector<std::string> PLUGIN_INTERFACES{ "IParaBase", "ISwitchable" };
 
-	PARAPLUGIN_EXPORT void getInterfaces(char** out_interfaces)
+	PARAPLUGIN_EXPORT void getInterfaces_ex(char** out_interfaces)
 	{
-		std::string result = "";
-
+		*out_interfaces = translateStr(toJoinedStr(PLUGIN_INTERFACES));
 	}
 
-	PARAPLUGIN_EXPORT void getSupportedFunctions_translator(char ** out_supportedFunctions)
+	/*PARAPLUGIN_EXPORT void getSupportedFunctions_translator(char ** out_supportedFunctions)
 	{
 		if (g_plugin)
 		{
-			/*std::string result = "";
-			for (std::string value : g_plugin->SUPPORTED_FUNCTIONS)
-			{
-				result.append(value);
-				result.append(",");
-			}*/
-
 			*out_supportedFunctions = translateStr(toJoinedStr(g_plugin->SUPPORTED_FUNCTIONS));
 		}
-	}
+	}*/
 
-	PARAPLUGIN_EXPORT int pluginEnable_translator()
+	PARAPLUGIN_EXPORT int pluginEnable_ex()
 	{
 		if (g_plugin)
 		{	
@@ -64,7 +56,7 @@ namespace ParaPlugin
 		}
 	}
 
-	PARAPLUGIN_EXPORT void setCbPluginEnabled_translator(void(*cb)())
+	PARAPLUGIN_EXPORT void setCbPluginEnabled_ex(void(*cb)())
 	{
 		if (g_plugin)
 		{

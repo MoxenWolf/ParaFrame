@@ -35,6 +35,15 @@ namespace ParaLib {
     typedef int (*IdeviceStartup)();
     typedef int (*IdeviceShutdown)();
 
+    struct IParaBase
+    {
+        int (*pluginEnable)();
+        void (*setPluginEnabledCb)(void(*cb)());
+    };
+
+    
+
+
     typedef void (*IgetSupportedFunctions)(char**);
     typedef int (*IpluginEnable)();
     typedef void (*IsetPluginEnabled)(void(*cb)());
@@ -83,4 +92,9 @@ namespace ParaLib {
 		    }
 #else
 #define PF_DEBUG(message)
+#endif
+
+#if __cplusplus >= 202002L
+
+    // C++20 (and later) code
 #endif

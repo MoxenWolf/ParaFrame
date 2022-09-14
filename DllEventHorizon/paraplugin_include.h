@@ -17,15 +17,15 @@ namespace ParaPlugin
 		IParaBase() = default;
 		virtual ~IParaBase() = default;
 
-		const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a", };
-		const std::vector<std::string> SUPPORTED_FUNCTIONS{ "getSupportedFunctions_translator", "pluginEnable_translator" };
+		//const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a", };
+		//const std::vector<std::string> SUPPORTED_FUNCTIONS{ "getSupportedFunctions_translator", "pluginEnable_translator" };
 
 		int pluginId{0};
 
-		std::vector<std::string> getSupportedFunctions()
-		{
-			return std::vector<std::string>{"pluginEnable_translator"};
-		}
+		//std::vector<std::string> getSupportedFunctions() // TODO: this needs to be moved to plugin instance file or changed to interfaces
+		//{
+		//	return std::vector<std::string>{"pluginEnable_translator"};
+		//}
 
 		void(*pluginEnabled)() = nullptr;
 
@@ -52,6 +52,7 @@ namespace ParaPlugin
 
 	/* *** Helper f()s and vals *** */
 
+	const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a",};
 	const char LIST_SEP = '#';
 
 	template <typename T> std::string toJoinedStr(T v)
@@ -73,5 +74,14 @@ namespace ParaPlugin
 		strcpy_s(x, size, p_sValue.c_str());
 		return x;
 	}
+
+	PARAPLUGIN_EXPORT void getSupportedInterfaceVersions_ex(char** out_supportedInterfaces)
+	{
+		*out_supportedInterfaces = translateStr(toJoinedStr(SUPPORTED_INTERFACE_VERSIONS));
+	}
 	
+#if __cplusplus >= 202002L
+	
+	// C++20 (and later) code
+#endif
 }
