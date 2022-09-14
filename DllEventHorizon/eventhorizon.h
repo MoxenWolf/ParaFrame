@@ -15,7 +15,7 @@ namespace ParaPlugin
 		}
 		~EventHorizon() {}
 
-		int pluginEnable()
+		int pluginEnable() //TODO Change from returning int to void
 		{
 			//do stuff to enable plugin
 
@@ -30,28 +30,17 @@ namespace ParaPlugin
 
 	const std::vector<std::string> PLUGIN_INTERFACES{ "IParaBase", "ISwitchable" };
 
-	PARAPLUGIN_EXPORT void getInterfaces_ex(char** out_interfaces)
+	PARAPLUGIN_EXPORT void getPluginInterfaces_ex(char** out_interfaces)
 	{
 		*out_interfaces = translateStr(toJoinedStr(PLUGIN_INTERFACES));
 	}
-
-	/*PARAPLUGIN_EXPORT void getSupportedFunctions_translator(char ** out_supportedFunctions)
-	{
-		if (g_plugin)
-		{
-			*out_supportedFunctions = translateStr(toJoinedStr(g_plugin->SUPPORTED_FUNCTIONS));
-		}
-	}*/
 
 	PARAPLUGIN_EXPORT int pluginEnable_ex()
 	{
 		if (g_plugin)
 		{	
-			int value = g_plugin->pluginEnable();
-			/*if (value > 0 && g_plugin->pluginEnabled)
-			{
-				g_plugin->pluginEnabled();
-			}*/
+			int value = g_plugin->pluginEnable(); //example calls pluginEnabled() from inside this f()
+			
 			return value;
 		}
 	}

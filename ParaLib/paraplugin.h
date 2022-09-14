@@ -35,9 +35,9 @@ namespace ParaLib {
 
 		ParaCommon::PARAFRAME_ERROR lastError();
 
-		bool loadPlugin(const QString&);
+		bool loadPlugin(const QString&); //TODO make slot and test
 
-		union u_pcast
+		union u_pcast //TODO make generic templated solution
 		{
 			void (ParaPlugin::*pluginEnabled_bound)();
 			void (*test)();
@@ -56,9 +56,6 @@ namespace ParaLib {
 		QLibrary* pluginLib = Q_NULLPTR;
 
 		/* interfaces into plugin */
-		ParaLib::IgetSupportedFunctions getSupportedFunctions;
-		ParaLib::IpluginEnable pluginEnable;
-		ParaLib::IsetPluginEnabled setPluginEnabledCb;
 
 		ParaLib::IParaBase iParaBase; // all f() pointers for IParaBase
 

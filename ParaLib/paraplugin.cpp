@@ -64,20 +64,42 @@ bool ParaPlugin::loadPlugin(const QString& path)
 				{
 					try
 					{
-						//getSupportedFunctions = (ParaLib::IgetSupportedFunctions)pluginLib->resolve("getSupportedFunctions_ex");
-						iParaBase.pluginEnable = (ParaLib::IpluginEnable)pluginLib->resolve("pluginEnable_ex");
-						//pluginEnable = (ParaLib::IpluginEnable)pluginLib->resolve("pluginEnable_translator");
-						iParaBase.setPluginEnabledCb = (ParaLib::IsetPluginEnabled)pluginLib->resolve("setCbPluginEnabled_ex");
-						//setPluginEnabledCb = (ParaLib::IsetPluginEnabled)pluginLib->resolve("setCbPluginEnabled_ex");
+						iParaBase.getSupportedInterfaceVersions = (ParaLib::ft_void_charstar_out)pluginLib->resolve("getSupportedInterfaceVersions_ex");
+						iParaBase.getPluginInterfaces = (ParaLib::ft_void_charstar_out)pluginLib->resolve("getPluginInterfaces_ex");
+
+						iParaBase.pluginEnable = (ParaLib::ft_int_)pluginLib->resolve("pluginEnable_ex");
+						iParaBase.setPluginEnabled_cb = (ParaLib::ft_cb_void_)pluginLib->resolve("setCbPluginEnabled_ex");
 					}
 					catch (...)
 					{
 						errors.enqueue(ParaCommon::PARAFRAME_ERROR::PLUGIN_LIB_CRITICAL_FUNCTION_NOT_RESOLVED);
 					}
 
-					if (iParaBase.setPluginEnabledCb)
+					if (iParaBase.getSupportedInterfaceVersions)
 					{
-						iParaBase.setPluginEnabledCb(fnptr.test);
+						char* supportedInterfaceVersions;
+						iParaBase.getSupportedInterfaceVersions(&supportedInterfaceVersions);
+						std::string value{ supportedInterfaceVersions };
+						delete supportedInterfaceVersions;
+
+						PF_DEBUG(QString::fromStdString(value));
+						success = true;
+					}
+
+					if (iParaBase.getPluginInterfaces)
+					{
+						char* pluginInterfaces;
+						iParaBase.getPluginInterfaces(&pluginInterfaces);
+						std::string value{ pluginInterfaces };
+						delete pluginInterfaces;
+
+						PF_DEBUG(QString::fromStdString(value));
+						success = true;
+					}
+
+					if (iParaBase.setPluginEnabled_cb)
+					{
+						iParaBase.setPluginEnabled_cb(fnptr.test);
 						PF_DEBUG("setPluginEnabledCb resolved...");
 						success = true;
 					}
@@ -88,40 +110,6 @@ bool ParaPlugin::loadPlugin(const QString& path)
 						PF_DEBUG(QString::number(value));
 						success = true;
 					}
-					
-					//if (getSupportedFunctions)
-					//{
-					//	//QList<QString> value((std::list<std::string>)getSupportedFunctions());
-					//	//std::vector<std::string> value = getSupportedFunctions();
-					//	char* supportedFunctions;
-					//	getSupportedFunctions(&supportedFunctions);
-					//	std::string value{ supportedFunctions };
-					//	delete supportedFunctions;
-					//	
-					//	//PF_DEBUG(QString::fromStdString(value.front()));
-					//	PF_DEBUG(QString::fromStdString(value));
-					//	success = true;
-					//}
-
-					//if (setPluginEnabledCb)
-					//{
-					//	//setPluginEnabledCb(&ParaLib::pluginEnabled_test);
-					//	//setPluginEnabledCb(&ParaLib::ParaPlugin::pluginEnabled_static);
-					//	//setPluginEnabledCb(&ParaPlugin::pluginEnabled_bound);
-					//	//void* (*object_ptr)() = &pluginEnabled_bound;
-
-					//	setPluginEnabledCb(fnptr.test);
-
-					//	PF_DEBUG("setPluginEnabledCb resolved...");
-					//	success = true;
-					//}
-
-					//if (pluginEnable)
-					//{
-					//	int value = pluginEnable();
-					//	PF_DEBUG(QString::number(value));
-					//	success = true;
-					//}
 				}
 				else
 				{

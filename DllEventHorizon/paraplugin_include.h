@@ -27,7 +27,7 @@ namespace ParaPlugin
 		//	return std::vector<std::string>{"pluginEnable_translator"};
 		//}
 
-		void(*pluginEnabled)() = nullptr;
+		void(*pluginEnabled)() = nullptr; //TODO Change from passing nothing to passing a bool
 
 		void setPluginEnabledCb(void(*callback)())
 		{
@@ -52,7 +52,7 @@ namespace ParaPlugin
 
 	/* *** Helper f()s and vals *** */
 
-	const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a",};
+	const std::vector<std::string> SUPPORTED_INTERFACE_VERSIONS{ "0.1a", "0.1b"};
 	const char LIST_SEP = '#';
 
 	template <typename T> std::string toJoinedStr(T v)

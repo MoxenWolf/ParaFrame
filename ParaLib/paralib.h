@@ -27,28 +27,31 @@
 /*Local*/
 
 #define PARAFRAME_VERSION "0.0.1"
-#define CURRENT_PARAFRAME_INTERFACE_VERSION "0.1a"
+#define CURRENT_PARAFRAME_INTERFACE_VERSION "0.1b"
 
 namespace ParaLib {
 
     /* *** Interface Defs *** */
-    typedef int (*IdeviceStartup)();
-    typedef int (*IdeviceShutdown)();
+
+    //directs
+    typedef void (*ft_void_)();
+    typedef void (*ft_void_charstar_out)(char**);
+    typedef void (*ft_void_int)(int);
+    typedef void (*ft_void_float)(float);
+    typedef int (*ft_int_)();
+    
+    //callback sets (set callback to pointer to function with signature...)
+    typedef void (*ft_cb_void_)(void(*)());
+    typedef void (*ft_cb_int_)(int(*)());
+    
 
     struct IParaBase
     {
-        int (*pluginEnable)();
-        void (*setPluginEnabledCb)(void(*cb)());
+        ft_void_charstar_out getSupportedInterfaceVersions;
+        ft_void_charstar_out getPluginInterfaces;
+        ft_int_ pluginEnable;
+        ft_cb_void_ setPluginEnabled_cb;
     };
-
-    
-
-
-    typedef void (*IgetSupportedFunctions)(char**);
-    typedef int (*IpluginEnable)();
-    typedef void (*IsetPluginEnabled)(void(*cb)());
-    typedef void (*voidCb)();
-    
 
     /* *** Utility *** */
     class ParaCommon : public QObject
