@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 /*Core*/
 #include <QObject>
 #include <QtCore/QString>
@@ -37,10 +39,11 @@ namespace ParaLib {
 
 		bool loadPlugin(const QString&); //TODO make slot and test
 
+		//TODO Investigate std::function<> for calling this or to replace
 		union u_pcast //TODO make generic templated solution
 		{
-			void (ParaPlugin::*pluginEnabled_bound)();
-			void (*test)();
+			void (ParaPlugin::*pluginEnabled_bound_tmp)(bool, int);
+			void (*test)(bool, int);
 		}fnptr;
 
 	private:
@@ -57,10 +60,14 @@ namespace ParaLib {
 
 		/* interfaces into plugin */
 
+
+
 		ParaLib::IParaBase iParaBase; // all f() pointers for IParaBase
 
-		void pluginEnabled_bound();
+		void pluginEnabled_bound(bool p_success, int p_value);
 	};
+
+	void pluginEnabled_unbound(bool p_success, int p_value);
 }
 
 

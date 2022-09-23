@@ -3,10 +3,11 @@
 #include "paraplugin_include.h"
 
 #include <string>
+#include <iostream>
 
 namespace ParaPlugin
 {
-	class EventHorizon : public IParaBase, public ISwitchable
+	class EventHorizon : public IParaBase, ICalibratable, IGenericSensor
 	{
 	public:
 		EventHorizon()
@@ -19,10 +20,32 @@ namespace ParaPlugin
 		{
 			//do stuff to enable plugin
 
-			pluginEnabled(); //call to plugin manager
+			OutputDebugString(L"inside before...\n");
+			bool val = false;
+			pluginEnabled(true, 42); //call to plugin manager
+			OutputDebugString(L"inside mid...\n");
+			bool val2 = true;
+			pluginEnabled(false, 43);
+			OutputDebugString(L"inside after...\n");
+
+			
 			return 43;
 		}
+
+		bool calibrate()
+		{
+
+		}
+
+		float getSensorValue()
+		{
+
+		}
 	};
+
+
+
+
 
 	/* *** DO NOT ALTER BELOW *** */
 
@@ -37,15 +60,16 @@ namespace ParaPlugin
 
 	PARAPLUGIN_EXPORT int pluginEnable_ex()
 	{
+		int rtv = -1;
+
 		if (g_plugin)
 		{	
-			int value = g_plugin->pluginEnable(); //example calls pluginEnabled() from inside this f()
-			
-			return value;
+			rtv = g_plugin->pluginEnable(); //example calls pluginEnabled() from inside this f()
 		}
+		return rtv;
 	}
 
-	PARAPLUGIN_EXPORT void setCbPluginEnabled_ex(void(*cb)())
+	PARAPLUGIN_EXPORT void setCbPluginEnabled_ex(ft_void_bool cb) //TODO Change to respect new typedefs
 	{
 		if (g_plugin)
 		{

@@ -33,6 +33,17 @@ namespace ParaLib {
 
     /* *** Interface Defs *** */
 
+    //TODO make into singal template for protosignals and singal template for protoslots
+    template<typename R>
+    using FT_SIG = void(*)(R);
+
+    FT_SIG<int> xt;
+
+    void testing(int v)
+    {
+        return v;
+    }
+
     //directs
     typedef void (*ft_void_)();
     typedef void (*ft_void_charstar_out)(char**);
@@ -43,14 +54,25 @@ namespace ParaLib {
     //callback sets (set callback to pointer to function with signature...)
     typedef void (*ft_cb_void_)(void(*)());
     typedef void (*ft_cb_int_)(int(*)());
+    typedef void (*ft_cb_void_bool)(void(*)(bool, int));
     
 
     struct IParaBase
     {
+        struct ProtoSignals
+        {
+
+        };
+        
+        struct ProtoSlots
+        {
+
+        };
+
         ft_void_charstar_out getSupportedInterfaceVersions;
         ft_void_charstar_out getPluginInterfaces;
         ft_int_ pluginEnable;
-        ft_cb_void_ setPluginEnabled_cb;
+        ft_cb_void_bool setPluginEnabled_cb;
     };
 
     /* *** Utility *** */
@@ -62,7 +84,7 @@ namespace ParaLib {
         ParaCommon(QWidget* parent = Q_NULLPTR) : QObject{ parent } {};
         virtual ~ParaCommon() {}
 
-        const QStringList INTERFACE_VERSION_SUPPORT{ CURRENT_PARAFRAME_INTERFACE_VERSION };
+        const QStringList INTERFACE_VERSION_SUPPORT{ "0.1a", CURRENT_PARAFRAME_INTERFACE_VERSION};
 
         const QColor getRandColor()
         {

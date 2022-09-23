@@ -6,11 +6,15 @@
 
 #define PARAPLUGIN_EXPORT extern "C" __declspec(dllexport)
 
-typedef int (*pluginEnabled)();
+//typedef int (*pluginEnabled)();
 
 
 namespace ParaPlugin
 {
+	/* *** Callback Interface Defs *** */
+	typedef void (*ft_void_bool)(bool, int);
+
+
 	struct IParaBase //TODO: probably change to struct and put in a virtual destructor
 	{
 	public:
@@ -27,9 +31,10 @@ namespace ParaPlugin
 		//	return std::vector<std::string>{"pluginEnable_translator"};
 		//}
 
-		void(*pluginEnabled)() = nullptr; //TODO Change from passing nothing to passing a bool
+		//void(*pluginEnabled)() = nullptr;
+		ft_void_bool pluginEnabled = nullptr;
 
-		void setPluginEnabledCb(void(*callback)())
+		void setPluginEnabledCb(ft_void_bool callback)
 		{
 			pluginEnabled = callback;
 		}
@@ -44,10 +49,27 @@ namespace ParaPlugin
 
 	struct ISwitchable
 	{
+	public:
 		ISwitchable() = default;
 		virtual ~ISwitchable() = default;
 
-		
+		virtual void activateSwitch(int, bool) = 0;
+	};
+
+	struct ICalibratable
+	{
+		virtual bool calibrate() = 0;
+	};
+
+	struct IGenericSensor
+	{
+		IGenericSensor() = default;
+		virtual ~IGenericSensor() = default;
+
+
+		void (*cb_valueChanged)(float) = nullptr;
+
+		virtual float getSensorValue() = 0;
 	};
 
 	/* *** Helper f()s and vals *** */

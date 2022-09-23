@@ -5,7 +5,8 @@ using namespace ParaLib;
 ParaPlugin::ParaPlugin(QObject *parent)
 	: QObject(parent)
 {
-	fnptr.pluginEnabled_bound = &ParaPlugin::pluginEnabled_bound;
+	fnptr.pluginEnabled_bound_tmp = &ParaPlugin::pluginEnabled_bound;
+	
 
 }
 
@@ -27,6 +28,9 @@ ParaCommon::PARAFRAME_ERROR ParaPlugin::lastError()
 
 bool ParaPlugin::loadPlugin(const QString& path)
 {
+	//fnptr.pluginEnabled_bound_tmp = &this->pluginEnabled_bound;
+	fnptr.pluginEnabled_bound_tmp = &ParaPlugin::pluginEnabled_bound;
+
 	bool success = false;
 
 	QFileInfo paraFileInfo{ path };
@@ -68,7 +72,8 @@ bool ParaPlugin::loadPlugin(const QString& path)
 						iParaBase.getPluginInterfaces = (ParaLib::ft_void_charstar_out)pluginLib->resolve("getPluginInterfaces_ex");
 
 						iParaBase.pluginEnable = (ParaLib::ft_int_)pluginLib->resolve("pluginEnable_ex");
-						iParaBase.setPluginEnabled_cb = (ParaLib::ft_cb_void_)pluginLib->resolve("setCbPluginEnabled_ex");
+						iParaBase.setPluginEnabled_cb = (ParaLib::ft_cb_void_bool)pluginLib->resolve("setCbPluginEnabled_ex");
+						
 					}
 					catch (...)
 					{
@@ -100,9 +105,12 @@ bool ParaPlugin::loadPlugin(const QString& path)
 					if (iParaBase.setPluginEnabled_cb)
 					{
 						iParaBase.setPluginEnabled_cb(fnptr.test);
+						//iParaBase.setPluginEnabled_cb(pluginEnabled_unbound);
 						PF_DEBUG("setPluginEnabledCb resolved...");
 						success = true;
 					}
+
+					
 
 					if (iParaBase.pluginEnable)
 					{
@@ -134,7 +142,15 @@ bool ParaPlugin::loadPlugin(const QString& path)
 	return success;
 }
 
-void ParaLib::ParaPlugin::pluginEnabled_bound()
+void ParaLib::ParaPlugin::pluginEnabled_bound(bool p_success, int p_value)
 {
-	PF_DEBUG("inside pluginEnabled (bound)");
+	xt = [=](int v) {};
+	bool val = p_success;
+	PF_DEBUG(QString("inside pluginEnabled (bound) with result of: " + QString(val ? "true" : "false")));
+}
+
+void ParaLib::pluginEnabled_unbound(bool p_success, int p_value)
+{
+	bool val = p_success;
+	PF_DEBUG(QString("inside pluginEnabled (unbound) with result of: " + QString(val ? "true" : "false")));
 }
