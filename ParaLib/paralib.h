@@ -45,6 +45,7 @@ namespace ParaLib {
     }
 
     //directs
+    //TODO change typedefs to using statements that can take templates (see above)
     typedef void (*ft_void_)();
     typedef void (*ft_void_charstar_out)(char**);
     typedef void (*ft_void_int)(int);
